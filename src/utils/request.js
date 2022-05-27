@@ -1,9 +1,7 @@
-// import axios from "axios";
-
 const axios = require('axios').default;
-
+const URL = 'https://echo-serv.tbxnet.com/v1/secret'
 const externalApi = axios.create({
-    baseURL: 'https://echo-serv.tbxnet.com/v1/secret'
+    baseURL: URL
 });
 
 externalApi.defaults.headers.common['Content-Type'] = 'application/json';
@@ -13,7 +11,6 @@ externalApi.defaults.headers.common['authorization'] = 'Bearer aSuperSecretKey';
 
 
 const FileList = async() =>{
-
     return await  externalApi.get('/files')
     .then( response => {
         return response.data.files
@@ -24,4 +21,17 @@ const FileList = async() =>{
     });
 }
 
-module.exports = { FileList } 
+const FileByName = async(file) =>{
+
+    return await  externalApi.get('/file/' + file)
+    .then( response => {
+        // console.log('response',response.data)
+        return response.data
+     })
+     .catch(error => {
+        console.log(error)
+        return "ERROR"
+    });
+}
+
+module.exports = { FileList, FileByName } 
