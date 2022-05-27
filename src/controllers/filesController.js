@@ -75,11 +75,16 @@ const FormatFile = async(file = []) =>{
                item.number != '' && item.number != null && item.number != undefined &&
                item.hex    != '' && item.hex    != null && item.hex    != undefined){
                 
-                return newArray.lines.push({
-                    "text"  :item.text,
-                    "number":item.number,
-                    "hex"   :item.hex
-                })
+                if(item.hex.length === 32){
+                    
+                    return newArray.lines.push({
+                        "text"  :item.text,
+                        "number":item.number,
+                        "hex"   :item.hex
+                    })
+
+                }
+
             }
         })
 
