@@ -25,7 +25,6 @@ const FileByName = async(file) =>{
 
     return await  externalApi.get('/file/' + file)
     .then( response => {
-        // console.log('response',response.data)
         return response.data
      })
      .catch(error => {

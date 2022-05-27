@@ -9,7 +9,7 @@ app.use(cors())
 app.use(express.Router())
 app.use(express.urlencoded({extended:true})) 
 
-app.use('/files/data',routerFiles)
+app.use('/files',routerFiles)
 
 //port
 const PORT = process.env.PORT || 8080
