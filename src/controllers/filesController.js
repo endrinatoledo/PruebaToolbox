@@ -19,45 +19,49 @@ const getFileByName = async(req, res) =>{
 
 }
 
-const DeleteFirstElement = async(array = []) =>{
+const DeleteFirstElement = ( array = []) =>{
 
-    if(array.length > 0){
-        array.shift();
-    
+    if(typeof(array) != 'object'){
         return array
-        
-
     }else{
-        return array
+        if(array.length > 0){
+            array.shift();
+            return array
+        }else{
+            return array
+        }
     }
+
+
 }
 
-const ConvertCsvToJson = async(csv = []) =>{
-    if(csv !== null && csv !== undefined){
-        
-        const lines = csv.split('\n')
-        const result = []
-        const headers = lines[0].split(',')
+const ConvertCsvToJson = (csv = []) =>{
 
-        lines.map(l => {
-            const obj = {}
-            const line = l.split(',')
+        if(csv !== null && csv !== undefined){
+            
+            const lines = csv.split('\n')
+            const result = []
+            const headers = lines[0].split(',')
 
-            headers.map((h, i) => {
-                obj[h] = line[i]
+            lines.map(l => {
+                const obj = {}
+                const line = l.split(',')
+
+                headers.map((h, i) => {
+                    obj[h] = line[i]
+                })
+
+                result.push(obj)
             })
+            return JSON.parse(JSON.stringify(result))
+        
+        }else{
+            return csv
+        }
 
-            result.push(obj)
-        })
+}
 
-        return JSON.parse(JSON.stringify(result))
-    
-    }else{
-        return csv
-    }
-    }
-
-const FormatFile = async(file = []) =>{
+const FormatFile = (file = []) =>{
 
     let newArray = []
     
@@ -97,7 +101,12 @@ const FormatFile = async(file = []) =>{
 
 }
 
+
+
 module.exports = {
     getAllFiles,
-    getFileByName
+    getFileByName,
+    DeleteFirstElement,
+    ConvertCsvToJson,
+    FormatFile
 }
