@@ -1,6 +1,6 @@
 const assert = require('chai').assert
 const expect = require('chai').expect
-const {DeleteFirstElement, ConvertCsvToJson} = require('../controllers/filesController')
+const {DeleteFirstElement, FormatFile} = require('../controllers/filesController')
 
   let array = [
   {'filename':'filename','number': 'number', 'text':'text', 'hex':'hex'},
@@ -15,7 +15,7 @@ const {DeleteFirstElement, ConvertCsvToJson} = require('../controllers/filesCont
   test2.csv,iYVRj
   test2.csv,CiPtbZhObjZRxMAMNyWLX,3254,bf94dccc18cbbe933c0df235de71bd3f`
 
-  
+
 // describe('Array', function () {
   describe('Pruebas para: DeleteFirstElement', function () {
     it('Array Vacío', function () {
@@ -33,6 +33,26 @@ const {DeleteFirstElement, ConvertCsvToJson} = require('../controllers/filesCont
       let result = (DeleteFirstElement(stringValue))
       expect(typeof(result)) === 'object';
     });
+  });
+
+  describe('Pruebas para: FormatFile', function () {
+    it('Array Vacío', function () {
+      let result = (FormatFile(emptyArray))
+      assert.equal(result, emptyArray);
+    });
+    it('Tipo de dato devuelto', function () {
+      let result = typeof (FormatFile(array))
+      assert.equal(result, 'object');
+    });
+    it('Enviar parametro Numerico', function () {
+      let result = (FormatFile(numberValue))
+      expect(typeof(result)) === 'object';
+    });
+    it('Enviar parametro String', function () {
+      let result = (FormatFile(stringValue))
+      expect(typeof(result)) === 'object';
+    });
+
   });
 
 // });

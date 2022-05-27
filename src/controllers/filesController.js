@@ -36,9 +36,9 @@ const DeleteFirstElement = ( array = []) =>{
 }
 
 const ConvertCsvToJson = (csv = []) =>{
+     
+        if(csv !== null && csv !== undefined && csv.length > 0){
 
-        if(csv !== null && csv !== undefined){
-            
             const lines = csv.split('\n')
             const result = []
             const headers = lines[0].split(',')
@@ -66,6 +66,9 @@ const FormatFile = (file = []) =>{
     let newArray = []
     
 
+    if(typeof(file) != 'object'){
+        return file
+    }else{
     if(file.length > 0){
 
         newArray = {
@@ -98,7 +101,7 @@ const FormatFile = (file = []) =>{
     }else{
         return file
     }
-
+    }
 }
 
 
